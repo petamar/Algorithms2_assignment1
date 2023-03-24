@@ -1,0 +1,8 @@
+Domain-1,2,3,4,5
+Var-Coffee
+Var-Water
+Var-Tea
+Var-Milk
+Var-Orange Juice
+Cons-Milk = 3
+Cons-
