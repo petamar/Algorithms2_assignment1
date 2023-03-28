@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class ConstraintSolver {
 
     private Domain dom;
-    private List<Variable> variableSet;
+    public List<Variable> variableSet;
 
     private List<Constraint> constraintSet;
 
@@ -192,11 +192,6 @@ public class ConstraintSolver {
                     constraintSet.get(i).reduce();
                 }
             }
-
-
-
-            recursion(0);
-
     }
 
 
@@ -217,16 +212,16 @@ public class ConstraintSolver {
                                 //nacitaj vsetky mozne veci z 0
                                 for (int d = a+ 1; d < 24; d++) {
                                     Domain savedDomain = outer.get(0).get(d).getDomain();
-                                    String savedName = outer.get(0).get(d).getName();
-                                    Variable savedVariable = new Variable(savedName, savedDomain);
                                     variableSet.get(d).setDomain(savedDomain);
 
                                 }
                             }
+                            //System.out.print(variableSet);
 
                            for (int m = 0; m < constraintSet.size(); m++) {
                                 if (constraintSet.get(m).isSatisfied()) {
                                     constraintSet.get(m).reduce();
+                                    //System.out.print(variableSet);
                                 }
                             }
 

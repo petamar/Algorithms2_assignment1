@@ -15,7 +15,7 @@ public class Variable {
     }
 
     public Domain getDomain(){
-        return d;
+        return this.d;
     }
 
     public void setDomain(Domain newD){

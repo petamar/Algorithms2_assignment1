@@ -1,10 +1,13 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConstraintDifferenceVarVar extends Constraint{
 
     Variable v1, v2;
+    public List<Variable> variableSet;
+
 
     public ConstraintDifferenceVarVar(Variable v1, Variable v2) {
         this.v1 = v1;
