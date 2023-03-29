@@ -11,7 +11,6 @@ public class Domain {
 
 
     public Domain(Domain d2) {
-        //TODO make a copy of the domain from what d2 contains
         vals = new int[d2.vals.length];
         for(int i = 0; i < vals.length; i++)
             this.vals[i] = d2.vals[i];
@@ -31,9 +30,6 @@ public class Domain {
         this.vals = newArr;
     }
 
-    /**
-     * @return
-     */
     public String toString() {
         String result  = "{";
         for (int i = 0; i < vals.length; i++)
@@ -42,30 +38,29 @@ public class Domain {
         return result;
     }
 
-    /**
-     * @return
-     */
-    private Domain[] split() {
-        return (new Domain[2]);
+    public Domain[] split() {
+        int intDomain1[] = new int[vals.length/2];
+        int intDomain2[] = new int[vals.length - (vals.length/2)];
+        for(int q = 0; q < vals.length/2; q++){
+            intDomain1[q] = vals[q];
+        }
+        for(int w = 0; w < vals.length - (vals.length/2); w++){
+            intDomain2[w] = vals[w + (vals.length/2)];
+        }
+        Domain domain1 = new Domain(intDomain1);
+        Domain domain2 = new Domain(intDomain2);
+        Domain domains[] = new Domain[2];
+        domains[0] = domain1;
+        domains[1] = domain2;
+        return domains;
     }
 
-    /**
-     * @return
-     */
-    public boolean isEmpty() {
-       return(vals.length == 0);
-    }
+    public boolean isEmpty() {return(vals.length == 0);}
 
-    /**
-     * @return
-     */
     private boolean equals(Domain d2) {
         return true;
     }
 
-    /**
-     * @return
-     */
     public boolean  isReducedToOnlyOneValue() {
         return (vals.length == 1);
     }

@@ -14,16 +14,16 @@ public class ConstraintEqualityVarCons extends Constraint{
     }
 
     protected boolean isSatisfied() {
+        //is true when variable domain contains i1
         String currentDom = String.valueOf(v1.getDomain());
         return currentDom.contains(i1.toString());
     }
 
     protected void reduce() {
+        //reduce domain to that one domain number
         int[] newDomainInt = new int[1];
         newDomainInt[0] = i1;
         Domain newDomain = new Domain(newDomainInt);
-        //if(!newDomain.isEmpty()) {
             v1.setDomain(newDomain);
-        //}
     }
 }

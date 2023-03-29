@@ -10,25 +10,14 @@ public class Variable {
         this.d = new Domain(d);
     }
 
-    public String toString() {
-        return this.name + "= " + d;
-    }
+    public String toString() { return this.name + "= " + d; }
 
-    public Domain getDomain(){
-        return this.d;
-    }
+    public Domain getDomain(){return this.d;}
 
-    public void setDomain(Domain newD){
-        d = newD;
-    }
+    public void setDomain(Domain newD){d = newD;}
 
     public String getName(){
         return name;
     }
-    public void setName(String nameNew){
-        name = nameNew;
-    }
-
-
 
 }

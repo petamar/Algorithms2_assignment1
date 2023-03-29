@@ -29,14 +29,13 @@ public class ConstraintEqualityVarVar extends Constraint {
 
     protected void reduce() {
         //remove all domain values that are not shared
-        String domainOne = String.valueOf(v1.getDomain());
+        Domain domainOne = v1.getDomain();
         String domainTwo = String.valueOf(v2.getDomain());
-        String[] domainNum = domainOne.split("");
         ArrayList<Integer> tempDomain = new ArrayList<Integer>();
 
-        for(int i = 1; i < domainOne.length() - 1; i++){
-            if(domainTwo.contains(domainNum[i])){
-                tempDomain.add(Integer.parseInt(domainNum[i]));
+        for(int i = 0; i < domainOne.vals.length; i++){
+            if(domainTwo.contains(String.valueOf(domainOne.vals[i]))){
+                tempDomain.add(domainOne.vals[i]);
             }
         }
 
@@ -45,10 +44,8 @@ public class ConstraintEqualityVarVar extends Constraint {
             newDomainInt[i] = tempDomain.get(i);
         }
         Domain newDomain = new Domain(newDomainInt);
-        //if(!newDomain.isEmpty()) {
-            v1.setDomain(newDomain);
-            v2.setDomain(newDomain);
-        //}
+        v1.setDomain(newDomain);
+        v2.setDomain(newDomain);
 
     }
 

@@ -22,53 +22,28 @@ public class ConstraintDifferenceVarVar extends Constraint{
         //true if they don't have one last value in common
         String domainOne = String.valueOf(v1.getDomain());
         String domainTwo = String.valueOf(v2.getDomain());
-        return !(domainTwo == domainOne);
+        boolean satisfied =!(domainTwo.equals(domainOne));
+        return satisfied;
     }
 
     protected void reduce() {
-        //remove all domain values that are not shared
-        String domainOne = String.valueOf(v1.getDomain());
-        String domainTwo = String.valueOf(v2.getDomain());
-        if(domainTwo.length() == 3){
-            if(domainOne.length()-3 > -1) {
-                int[] newDomainInt = new int[domainOne.length() - 3];
-                String[] partsOfD2 = domainTwo.split("");
-                String[] partsOfD1 = domainOne.split("");
-                if (domainOne.contains(partsOfD2[1])) {
-                    int newDomainIndex = 0;
-                    for (int i = 1; i < domainOne.length() - 1; i++) {
-                        if (!partsOfD2[1].equals(partsOfD1[i])) {
-                            newDomainInt[newDomainIndex] = Integer.parseInt(partsOfD1[i]);
-                            newDomainIndex++;
-                        }
-                    }
-                    Domain newDomain = new Domain(newDomainInt);
-                    //if(!newDomain.isEmpty()) {
-                        v1.setDomain(newDomain);
-                   // }
+        Domain domainOne = v1.getDomain();
+        Domain domainTwo = v2.getDomain();
+        if(domainTwo.vals.length == 1 && domainOne.vals.length > 1){
+            for(int i =0; i < domainOne.vals.length; i++){
+                if(domainOne.vals[i] == domainTwo.vals[0]){
+                    domainOne.delete(i);
                 }
             }
+            v1.setDomain(domainOne);
         }
-        else if(domainOne.length() == 3) {
-            if (domainTwo.length() - 3 > -1) {
-                int[] newDomainInt = new int[domainTwo.length() - 3];
-                String[] partsOfD2 = domainTwo.split("");
-                String[] partsOfD1 = domainOne.split("");
-                int newDomainIndex = 0;
-                if (domainTwo.contains(partsOfD1[1])) {
-
-                    for (int i = 1; i < domainTwo.length() - 1; i++) {
-                        if (!partsOfD2[i].equals(partsOfD1[1])) {
-                            newDomainInt[newDomainIndex] = Integer.parseInt(partsOfD2[i]);
-                            newDomainIndex++;
-                        }
-                    }
-                    Domain newDomain = new Domain(newDomainInt);
-                    //if(!newDomain.isEmpty()) {
-                        v2.setDomain(newDomain);
-                    //}
+        else if(domainOne.vals.length == 1 && domainTwo.vals.length > 1){
+            for(int i =0; i < domainTwo.vals.length; i++){
+                if(domainTwo.vals[i] == domainOne.vals[0]){
+                    domainTwo.delete(i);
                 }
             }
+            v2.setDomain(domainTwo);
         }
     }
 

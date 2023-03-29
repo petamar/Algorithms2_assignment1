@@ -21,14 +21,13 @@ public class ConstraintEqualityVarPlusCons extends Constraint{
 
     protected boolean isSatisfied() {
         //true if there exists a in α’s domain and b in β’s domain such that a = b + c
-        //get values into array list for easier manipulation
         String domainOne = String.valueOf(v1.getDomain());
         Domain domainTwo = v2.getDomain();
-        Integer[] resultInt = new Integer[domainTwo.vals.length * 2];
         for(int i = 0; i < domainTwo.vals.length ; i++){
-            resultInt[i] = domainTwo.vals[i] + i1;
-            resultInt[i] = domainTwo.vals[i] - i1;
-            if(domainOne.contains(String.valueOf(resultInt[i]))) return true;
+            //adding i1 and subtracting it, so we count with absolute value too
+            int num1 = domainTwo.vals[i] + i1;
+            int num2 = domainTwo.vals[i] - i1;
+            if(domainOne.contains(String.valueOf(num1)) || domainOne.contains(String.valueOf(num2))) return true;
         }
         return false;
     }
@@ -55,9 +54,6 @@ public class ConstraintEqualityVarPlusCons extends Constraint{
             newDomainOneInt[i] = finalResultInt.get(i);
         }
         Domain newDomainOne = new Domain(newDomainOneInt);
-        //if(!newDomainOne.isEmpty()) {
-            v1.setDomain(newDomainOne);
-        //}
 
         //array for storing numbers after a-c operation
         ArrayList<Integer> resultIntTwo = new ArrayList<Integer>();
@@ -79,10 +75,7 @@ public class ConstraintEqualityVarPlusCons extends Constraint{
             newDomainTwoInt[i]  = temp;
         }
         Domain newDomainTwo = new Domain(newDomainTwoInt);
-        //if(!newDomainTwo.isEmpty()) {
-            v2.setDomain(newDomainTwo);
-        //}
-
+        v1.setDomain(newDomainOne);
+        v2.setDomain(newDomainTwo);
     }
-
 }
